@@ -1,26 +1,26 @@
 import string
+import re
 
 
 def word_count(sentence):
 
-   new_sentence = sentence.translate(string.maketrans("",""), string.punctuation)
+    s = " "
+    puncuation_cleaner = str.maketrans('', '', string.punctuation)
 
-    print(sentence)
-
-    words = sentence.split()
+    seperated_sentence = re.split('[ _,]+', sentence)
+    combined_sentence = s.join(seperated_sentence)
+    cleaned_sentence = (combined_sentence.translate(puncuation_cleaner))
+    words = cleaned_sentence.split()
     word_dict = {}
-
-    print(words)
-    print(word_dict)
 
     for word in words:
         word_num = 0
 
         if str.isalpha(word) or str.isnumeric(word):
             for in_word in words:
-                if word == in_word:
+                if str.upper(word) == str.upper(in_word):
                     word_num += 1
-            if word not in word_dict:
-                word_dict[word] = word_num
+            if str.upper(word) not in map(str.upper, word_dict):
+                    word_dict[word] = word_num
 
     return word_dict
